@@ -1,34 +1,10 @@
 {
   "products": [
     {
-      "id": 1,
-      "text": "Mules",
-      "type": "Casual",
-      "want": true
-    },
-    {
-      "id": 2,
-      "text": "Oxfords",
-      "type": "Corporate",
-      "want": true
-    },
-    {
-      "id": 3,
-      "text": "Sandals",
-      "type": "Casual",
-      "want": true
-    },
-    {
       "id": 4,
       "text": "Derby",
       "type": "Corporate",
       "want": true
-    },
-    {
-      "id": 5,
-      "text": "Chelsea Boots",
-      "type": "Business Casual",
-      "want": false
     }
   ]
 }

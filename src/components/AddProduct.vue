@@ -9,7 +9,7 @@
             <input type="text"  v-model="type" name="type" placeholder="Add Product Type">
         </div>
 
-        <div class="form-control">
+        <div class="form-control wishcheck">
             <label>Wishlist</label>
             <input type="checkbox"  v-model="wishlist" name="wishlist" placeholder="Add to Wishlist">
         </div>
@@ -79,13 +79,11 @@
         outline: 1px solid chocolate;
     }
 
-    .form-control-check {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .wishcheck input {
+        height: 20px;
     }
 
-    .form-control-check input {
-        height: 20px;
+    .wishcheck input:focus {
+        outline: none;
     }
 </style>

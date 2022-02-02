@@ -9,20 +9,22 @@
     @toggle-want="toggleWant" @delete-product="deleteProduct" :products="products"
   />
  </div>
-  
+  <Footer />
 </template>
 
 <script>
 import Header from './components/Header'
 import Products from './components/Products'
 import AddProduct from './components/AddProduct'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
   components: {
     Header,
     Products,
-    AddProduct
+    AddProduct,
+    Footer
   },
   data() {
     return {
@@ -36,7 +38,7 @@ export default {
     },
 
     async addProduct(product) {
-      const res = await fetch('api/products', {
+      const res = await fetch('http://localhost:5000/products', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -51,21 +53,35 @@ export default {
     },
     async deleteProduct(id) {
      if (confirm('Are you sure?')) {
-       const res = await fetch(`api/products/${id}`, {
+       const res = await fetch(`http://localhost:5000/products/${id}`, {
         method: 'DELETE' 
       })
 
       res.status === 200 ? (this.products = this.products.filter((product) => product.id !== id)) : alert('Error deleting product')
 
-        
      } 
     },
-    toggleWant(id) {
-      this.products = this.products.map((product) => product.id === id ? {...product, want: !product.want } : product
+    async toggleWant(id) {
+      const productToggle = await this.fetchProduct(id)
+      const updateProduct = {
+        ...productToggle, want : !productToggle.want
+      }
+
+      const res = await fetch(`http://localhost:5000/products/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updateProduct)
+      })
+
+      const data = await res.json()
+
+      this.products = this.products.map((product) => product.id === id ? {...product, want: data.want } : product
       )
     },
     async fetchProducts() {
-      const res = await fetch('api/products')
+      const res = await fetch('http://localhost:5000/products')
 
       const data = await res.json()
 
@@ -73,7 +89,7 @@ export default {
     },
     
     async fetchProduct(id) {
-      const res = await fetch(`api/products/${id}`)
+      const res = await fetch(`http://localhost:5000/products/${id}`)
 
       const data = await res.json()
 

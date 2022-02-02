@@ -30,6 +30,12 @@
         cursor: pointer;
     }
 
+    h3 { 
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     .product.want {
         border-left: 5px solid #000;
     }
